@@ -22,9 +22,9 @@ const data = {
     }
 };
 
-const dataCopy = { ...data, another: "something" };
+const { name, age } = { ...data };
 
-console.log(dataCopy);
+console.log(data);
 
 
 
