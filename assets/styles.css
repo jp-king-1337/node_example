@@ -1,0 +1,14 @@
+.center {
+    text-align: center;
+}
+
+#curledCat {
+    height: 200;
+    width: auto;
+}
+
+#yawningCat,
+#hidingCat {
+    height: 100;
+    width: auto;
+}

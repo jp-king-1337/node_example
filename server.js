@@ -18,4 +18,12 @@ app.get("/api/data", (clientRequestObject, serverResponseObject) => {
     })
 })
 
+app.get("/catpage", (clientRequestObject, serverResponseObject) => {
+    serverResponseObject.sendFile(path.join(__dirname, "catpage.html"));
+})
+
+app.get("*", (clientRequestObject, serverResponseObject) => {
+    serverResponseObject.sendFile(path.join(__dirname, "notfound.html"));
+})
+
 app.listen(3333, () => console.log("Server started on port 3333."));
