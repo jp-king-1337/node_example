@@ -29,6 +29,7 @@ app.get("/api/people", (clientRequestObject, serverResponseObject) => {
         return personObj.id == clientRequestObject.query.id
     });
 
+    // Ternary expression below! 
     serverResponseObject.send(userObj ? userObj : {
         message: "User not found.",
         error: 404
