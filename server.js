@@ -45,4 +45,9 @@ app.get("/api/person/:id", (clientRequestObject, serverResponseObject) => {
   });
 });
 
+app.get("/test/:something/val", (clientRequestObject, serverResponseObject) => {
+    serverResponseObject.send("You did it!")
+});
+
+
 app.listen(3333, () => console.log("Server started on port 3333."));
