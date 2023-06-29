@@ -1,29 +1,35 @@
-const express = require("express");
-const path = require("path");
+const express = require('express');
+const path = require('path');
 
 const app = express();
 
-app.get("/", (clientRequestObject, serverResponseObject) => {
-    serverResponseObject.sendFile(path.join(__dirname, "index.html"));
+console.log(__dirname);
+
+const people = [
+  {
+    id: 1,
+    name: 'JD',
+    age: 43
+  },
+  {
+    id: 2,
+    name: 'Bob',
+    age: 99
+  }
+];
+
+
+// Will send the index.html file as response
+app.get('/', (clientRequestObject, serverResponseObject) => {
+  serverResponseObject.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get("/about", (clientRequestObject, serverResponseObject) => {
-    serverResponseObject.send("Hello from the about route!");
-})
+app.get('/api/people', (clientRequestObject, serverResponseObject) => {
+  console.log(clientRequestObject.query);
+  serverResponseObject.send({
+    message: 'Wow, we made an API',
+    date: new Date()
+  })
+});
 
-app.get("/api/data", (clientRequestObject, serverResponseObject) => {
-    serverResponseObject.send({
-        message: "Wow, we made an API!",
-        date: new Date()
-    })
-})
-
-app.get("/catpage", (clientRequestObject, serverResponseObject) => {
-    serverResponseObject.sendFile(path.join(__dirname, "catpage.html"));
-})
-
-app.get("*", (clientRequestObject, serverResponseObject) => {
-    serverResponseObject.sendFile(path.join(__dirname, "notfound.html"));
-})
-
-app.listen(3333, () => console.log("Server started on port 3333."));
+app.listen(3333, () => console.log('Server started on port 3333.'));
