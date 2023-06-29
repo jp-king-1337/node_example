@@ -25,11 +25,22 @@ app.get("/", (clientRequestObject, serverResponseObject) => {
 });
 
 app.get("/api/people", (clientRequestObject, serverResponseObject) => {
-    const userObj = people.find((personObj) => {
-        return personObj.id == clientRequestObject.query.id
-    });
+
+    // We're using the return below to avoid the else in this conditional.
+    if (!clientRequestObject.query.id) return serverResponseObject.send(people);
+
+    const userObj = people.find((personObj) => personObj.id == clientRequestObject.query.id);
 
     // Ternary expression below! 
+    serverResponseObject.send(userObj ? userObj : {
+        message: "User not found.",
+        error: 404
+    });
+});
+
+app.get("/api/person/:id", (clientRequestObject, serverResponseObject) => {
+    const userObj = people.find(personObj => personObj.id == clientRequestObject.params.id);
+
     serverResponseObject.send(userObj ? userObj : {
         message: "User not found.",
         error: 404
