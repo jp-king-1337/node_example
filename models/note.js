@@ -19,7 +19,7 @@ class Note {
 
         notes.push(this);
 
-        fs.writeFile(DB_PATH, JSON.stringify(notes), err => {
+        fs.writeFile(DB_PATH, JSON.stringify(notes, null, 2), err => {
             if (err) throw err;
 
             console.log("Note saved successfully!");
@@ -27,4 +27,4 @@ class Note {
     }
 }
 
-module.exports = Note;
+module.exports = { Note: Note, getNotes: getNotes };
