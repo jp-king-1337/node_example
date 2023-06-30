@@ -1,14 +1,27 @@
 const fs = require("fs");
+const { v4 } = require("uuid");
+const DB_PATH = "../db/notes.json";
 
-// This is a synchronous function
 function getNotes() {
-    return fs.readFileSync("../db/notes.json", "utf8");
+    return fs.readFileSync(DB_PATH, "utf8");
 }
 
-// create a Note class constructor that generates a note object with one property, text
 class Note {
     constructor(text) {
+        this.id = v4();
         this.text = text;
+    }
+
+    save() {
+        const notes = getNotes();
+
+        notes.push(this);
+
+        fs.writeFile(DB_PATH, JSON.stringify(notes), err => {
+            if (err) throw err;
+
+            console.log("Note saved successfully!");
+        });
     }
 }
 
