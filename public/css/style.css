@@ -5,6 +5,7 @@ form {
 
 .note {
   border: 1px solid #555;
+  border-radius: 5px;
   /* background-color: #301934;
   color: #fff; */
 }
