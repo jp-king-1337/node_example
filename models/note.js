@@ -1,9 +1,18 @@
 const fs = require("fs");
 const { v4 } = require("uuid");
-const DB_PATH = "../db/notes.json";
+const path = require("path");
+const DB_PATH = path.join(__dirname, "../db/notes.json");
 
 function getNotes() {
-    return fs.readFileSync(DB_PATH, "utf8");
+
+    try {
+        JSON.parse(fs.readFileSync(DB_PATH, "utf8"))
+        return notes;
+    } catch (err) {
+        return [];
+    }
+//     const notes = JSON.parse(fs.readFileSync(DB_PATH, "utf8")) || [];
+//     return notes;
 }
 
 class Note {
